@@ -1,0 +1,79 @@
+# ==============================================================================
+# Exact VPC-SC Egress & Ingress Policy YAML (Cross-Perimeter Configuration)
+# & of Apache Kafka to BigQuery Ingestion Pattern
+# ==============================================================================
+# Mandatory Restricted Services List:
+#   - managedkafka.googleapis.com
+#   - dataflow.googleapis.com
+#   - dataproc.googleapis.com
+#   - bigquery.googleapis.com
+#   - bigquerystorage.googleapis.com
+#   - biglake.googleapis.com
+#   - storage.googleapis.com
+#   - secretmanager.googleapis.com
+#   - cloudkms.googleapis.com
+#   - artifactregistry.googleapis.com
+#   - compute.googleapis.com
+#   - logging.googleapis.com
+#   - monitoring.googleapis.com
+# ==============================================================================
+# 1. EGRESS POLICY ON PERIMETER A (p-ingest-ZONE-{ENV}: Dataproc Serverless Compute)
+# Note: In VPC-SC, `serviceName: bigquery.googleapis.com` automatically governs
+# both `bigquery.googleapis.com` and `bigquerystorage.googleapis.com`.
+# Strictly locked to (Dataproc Serverless Spark) VPC/Shared-VPC origins.
+# ==============================================================================
+egressPolicies:
+  - title: "egress-track3-dataproc-spark-to-bq"
+    egressFrom:
+      identities:
+        - serviceAccount:sa-spark-kafka-bq@SPARK_PROJECT_ID.iam.gserviceaccount.com
+      sourceRestriction: SOURCE_RESTRICTION_ENABLED
+      sources:
+        # Strictly locked to customer VPC/compute projects (no accessLevel: "*")
+        - resource: projects/SPARK_PROJECT_NUMBER
+        - resource: projects/SVPC_HOST_PROJECT_NUMBER
+    egressTo:
+      resources:
+        - projects/BQ_PROJECT_NUMBER
+        - projects/LAKEHOUSE_GCS_PROJECT_NUMBER
+      operations:
+        - serviceName: bigquery.googleapis.com
+          methodSelectors:
+            - permission: bigquery.tables.get
+            - permission: bigquery.tables.create
+            - permission: bigquery.tables.updateData
+            - permission: bigquery.jobs.create
+        - serviceName: storage.googleapis.com
+          methodSelectors:
+            - method: "*"
+---
+# ==============================================================================
+# 2. INGRESS POLICY ON PERIMETER B (p-lakehouse-ZONE-{ENV}: BigQuery & GCS Target)
+# Authorizes inbound Storage Write API, Table Metadata & GCS Checkpoint calls
+# strictly from (Dataproc Serverless Spark) in Perimeter A.
+# ==============================================================================
+ingressPolicies:
+  - title: "ingress-track3-dataproc-spark-to-bq"
+    ingressFrom:
+      identities:
+        - serviceAccount:sa-spark-kafka-bq@SPARK_PROJECT_ID.iam.gserviceaccount.com
+      # Note: `sourceRestriction` is not a valid field in `ingressFrom`
+      # (`sources` is enforced natively); strictly locked to project origins.
+      sources:
+        - resource: projects/SPARK_PROJECT_NUMBER
+        - resource: projects/SVPC_HOST_PROJECT_NUMBER
+    ingressTo:
+      resources:
+        - projects/BQ_PROJECT_NUMBER
+        - projects/LAKEHOUSE_GCS_PROJECT_NUMBER
+      operations:
+        - serviceName: bigquery.googleapis.com
+          methodSelectors:
+            - permission: bigquery.tables.get
+            - permission: bigquery.tables.create
+            - permission: bigquery.tables.updateData
+            - permission: bigquery.jobs.create
+        - serviceName: storage.googleapis.com
+          methodSelectors:
+            - method: "*"
+

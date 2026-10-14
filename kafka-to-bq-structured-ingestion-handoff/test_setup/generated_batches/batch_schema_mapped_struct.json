@@ -1,0 +1,112 @@
+[
+  {
+    "key": "KEY-STRUCT-0001",
+    "value": "{\"event_id\": \"EVT-STRUCT-0001\", \"device\": {\"equipment_id\": \"METRO-SEM-02\", \"fab_site_code\": \"Ocotillo\", \"chamber_id\": \"SEM-CH-1\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-401\", \"metric_name\": \"rf_power_watts\", \"metric_value\": 42.75, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:00:15+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0001.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 1,
+    "offset": 1,
+    "timestamp": "2026-10-12T13:00:15+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0001.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0002",
+    "value": "{\"event_id\": \"EVT-STRUCT-0002\", \"device\": {\"equipment_id\": \"METRO-SEM-03\", \"fab_site_code\": \"Leixlip\", \"chamber_id\": \"SEM-CH-0\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-402\", \"metric_name\": \"wafer_temp_c\", \"metric_value\": 43.5, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:00:30+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0002.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 0,
+    "offset": 2,
+    "timestamp": "2026-10-12T13:00:30+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0002.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0003",
+    "value": "{\"event_id\": \"EVT-STRUCT-0003\", \"device\": {\"equipment_id\": \"METRO-SEM-01\", \"fab_site_code\": \"Fab34\", \"chamber_id\": \"SEM-CH-1\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-403\", \"metric_name\": \"laser_dose_mj\", \"metric_value\": 44.25, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:00:45+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0003.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 1,
+    "offset": 3,
+    "timestamp": "2026-10-12T13:00:45+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0003.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0004",
+    "value": "{\"event_id\": \"EVT-STRUCT-0004\", \"device\": {\"equipment_id\": \"METRO-SEM-02\", \"fab_site_code\": \"D1X\", \"chamber_id\": \"SEM-CH-0\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-404\", \"metric_name\": \"chamber_pressure_mbar\", \"metric_value\": 45.0, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:01:00+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0004.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 0,
+    "offset": 4,
+    "timestamp": "2026-10-12T13:01:00+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0004.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0005",
+    "value": "{\"event_id\": \"EVT-STRUCT-0005\", \"device\": {\"equipment_id\": \"METRO-SEM-03\", \"fab_site_code\": \"Ocotillo\", \"chamber_id\": \"SEM-CH-1\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-405\", \"metric_name\": \"rf_power_watts\", \"metric_value\": 45.75, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:01:15+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0005.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 1,
+    "offset": 5,
+    "timestamp": "2026-10-12T13:01:15+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0005.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0006",
+    "value": "{\"event_id\": \"EVT-STRUCT-0006\", \"device\": {\"equipment_id\": \"METRO-SEM-01\", \"fab_site_code\": \"Leixlip\", \"chamber_id\": \"SEM-CH-0\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-406\", \"metric_name\": \"wafer_temp_c\", \"metric_value\": 46.5, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:01:30+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0006.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 0,
+    "offset": 6,
+    "timestamp": "2026-10-12T13:01:30+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0006.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0007",
+    "value": "{\"event_id\": \"EVT-STRUCT-0007\", \"device\": {\"equipment_id\": \"METRO-SEM-02\", \"fab_site_code\": \"Fab34\", \"chamber_id\": \"SEM-CH-1\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-407\", \"metric_name\": \"laser_dose_mj\", \"metric_value\": 47.25, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:01:45+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0007.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 1,
+    "offset": 7,
+    "timestamp": "2026-10-12T13:01:45+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0007.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0008",
+    "value": "{\"event_id\": \"EVT-STRUCT-0008\", \"device\": {\"equipment_id\": \"METRO-SEM-03\", \"fab_site_code\": \"D1X\", \"chamber_id\": \"SEM-CH-0\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-408\", \"metric_name\": \"chamber_pressure_mbar\", \"metric_value\": 48.0, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:02:00+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0008.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 0,
+    "offset": 8,
+    "timestamp": "2026-10-12T13:02:00+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0008.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0009",
+    "value": "{\"event_id\": \"EVT-STRUCT-0009\", \"device\": {\"equipment_id\": \"METRO-SEM-01\", \"fab_site_code\": \"Ocotillo\", \"chamber_id\": \"SEM-CH-1\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-409\", \"metric_name\": \"rf_power_watts\", \"metric_value\": 48.75, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:02:15+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0009.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 1,
+    "offset": 9,
+    "timestamp": "2026-10-12T13:02:15+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0009.json"
+    }
+  },
+  {
+    "key": "KEY-STRUCT-0010",
+    "value": "{\"event_id\": \"EVT-STRUCT-0010\", \"device\": {\"equipment_id\": \"METRO-SEM-02\", \"fab_site_code\": \"Leixlip\", \"chamber_id\": \"SEM-CH-0\"}, \"telemetry\": {\"wafer_lot_id\": \"LOT-STRUCT-410\", \"metric_name\": \"wafer_temp_c\", \"metric_value\": 49.5, \"status_code\": \"CALIBRATED\", \"event_timestamp\": \"2026-10-12T13:02:30+00:00\", \"metric_unit\": \"nm\"}, \"source_file\": \"struct_feed/sem_scan_0010.json\"}",
+    "topic": "fab.cleanroom.metrology.struct.v1",
+    "partition": 0,
+    "offset": 10,
+    "timestamp": "2026-10-12T13:02:30+00:00",
+    "headers": {
+      "source_file": "struct_feed/sem_scan_0010.json"
+    }
+  }
+]

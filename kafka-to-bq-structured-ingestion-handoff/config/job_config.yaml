@@ -1,0 +1,67 @@
+# Apache Kafka to BigQuery Iceberg Bronze Ingestion Template Configuration
+# Single Central Configuration File for Environment & Runtime Defaults
+project_id: "poulamirc-poc"
+region: "us-central1"
+composer_environment: "enterprise-kafka-bq-composer3"
+
+# Template Input Parameters
+template_inputs:
+  # Supports GMK bootstrap FQDN, GMK topic resource URI, or External/On-Premises host:port list
+  kafka_bootstrap_servers: "bootstrap.sample-kafka-target-cluster.us-central1.managedkafka.poulamirc-poc.cloud.goog:9092"
+  gmk_bootstrap_servers: "bootstrap.sample-kafka-target-cluster.us-central1.managedkafka.poulamirc-poc.cloud.goog:9092"
+  external_kafka_bootstrap_servers: "10.20.0.50:9093"
+  kafka_topic: "fab.equipment.telemetry.json.v1"
+  kafka_source_type: "GMK"  # Options: GMK, EXTERNAL, AUTO
+  secret_name: "kafka-pam-credentials"  # Consolidated PAM JSON secret in GCP Secret Manager
+  # Input payload formats supported separately:
+  # JSON | AVRO_BINARY | AVRO_SCHEMA_REGISTRY | SCHEMA_MAPPED_STRUCT
+  input_format: "JSON"
+  avro_schema_path: "gs://poulamirc-poc-kafka-landing-zone/schemas/fab_telemetry_event.avsc"
+  schema_file_gcs_uri: "gs://poulamirc-poc-kafka-landing-zone/schemas/fab_telemetry_event.avsc"
+  schema_mapping_uri: "gs://poulamirc-poc-kafka-landing-zone/schemas/fab_schema_mapping.json"
+  schema_registry_url: "https://managedkafka.googleapis.com/v1/projects/poulamirc-poc/locations/us-central1/schemaRegistries/mfg-telemetry-sr-poc"
+  exclude_patterns: "*.tmp,*.bak,~$*,*.log,*_debug_*,*heartbeat*"
+  exclude_files: "desktop.ini,thumbs.db,.DS_Store,TEST_TOOL_IGNORE"
+  batch_mode: "available_now"  # Options: available_now (Trigger.AvailableNow) | processing_time
+  batch_size: 500000           # maxOffsetsPerTrigger guardrail per micro-batch wave
+  batch_interval_minutes: 5    # Micro-batch trigger interval in minutes when batch_mode=processing_time
+  starting_offsets: "earliest" # Options: earliest, latest
+  consumer_group_id: "cg-spark-kafka-bq-bronze"
+  gmk_consumer_group_id: "cg-spark-gmk-bq-bronze"
+  external_kafka_consumer_group_id: "cg-spark-extkafka-bq-bronze"
+  fail_on_data_loss: true
+
+# Template Output Parameters (Apache Iceberg on Bronze Layer)
+template_outputs:
+  output_format: "ICEBERG"
+  output_dataset: "bq_bronze_fab_telemetry_poc"
+  output_table: "fab_telemetry_events_bronze"
+  dlq_table: "fab_telemetry_events_dlq"
+  curated_view: "vw_fab_telemetry_events_curated"
+  output_bucket: "poulamirc-poc-kafka-landing-zone"
+  iceberg_storage_uri: "gs://poulamirc-poc-kafka-landing-zone/iceberg/bronze/fab_telemetry_events_bronze"
+  checkpoint_location: "gs://poulamirc-poc-kafka-landing-zone/checkpoints/kafka_to_bq/fab_telemetry_v1"
+  biglake_connection_id: "gcp_lakehouse_connection"
+  biglake_connection: "projects/poulamirc-poc/locations/us-central1/connections/gcp_lakehouse_connection"
+  write_method: "direct"  # BigQuery Storage Write API (gRPC) direct streaming into BigLake Iceberg
+
+# Network & Firewall Configuration
+network:
+  vpc_name: "kafka-bq-vpc"
+  subnet_name: "snet-dataproc-usc1"
+  subnet_cidr: "10.20.0.0/24"
+  gmk_subnet_name: "snet-gmk-usc1"
+  gmk_subnet_cidr: "10.20.1.0/24"
+  restricted_googleapis_cidr: "199.36.153.4/30"
+  enforce_no_public_ip: true
+
+# Customer-Managed Runtime Service Account
+iam:
+  service_account: "sa-spark-kafka-bq@poulamirc-poc.iam.gserviceaccount.com"
+
+# Dataproc Serverless Runtime & Scaling Guardrails
+job:
+  runtime_version: "2.2"
+  min_executors: 2
+  max_executors: 12
+  await_termination_timeout_ms: 600000

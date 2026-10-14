@@ -1,0 +1,19 @@
+{
+  "required_source_fields": [],
+  "field_mappings": {
+    "evtId": "event_id",
+    "eqpId": "equipment_id",
+    "siteCode": "fab_site_code",
+    "fab_site": "fab_site_code",
+    "lotId": "wafer_lot_id",
+    "paramName": "metric_name",
+    "paramValue": "metric_value",
+    "statusCode": "status_code",
+    "evtTs": "event_timestamp",
+    "srcFile": "source_file"
+  },
+  "type_casts": {
+    "metric_value": "FLOAT64"
+  },
+  "defaults": {}
+}
